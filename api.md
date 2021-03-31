@@ -1,10 +1,8 @@
 ## API Doc
 
-### 不良语言检测
+路由前缀： /api/v1
 
-| router | method | header |
-|:--: | :--:  |:--: |
-| api/v1/sniffle | POST  | None |
+### 不良语言检测
 
 | 参数 | 值 | 说明 |
 |:--: | :--:  |:--: |
@@ -27,7 +25,7 @@ Content-Type:
 ```json
 {
 	"data": [
-	    "123","sasda","是打发"
+	    "123","test","是打发"
 	]
 }
 ```
@@ -35,14 +33,93 @@ Content-Type:
 **Response Data**
 ```json
 {
-
+    "msg": "ok",
+    "data": [
+        {
+            "result": 0,
+            "content": ""
+        }
+    ]
 }
 ```
 
 ### 新闻列表
 
+| 参数 | 值 | 说明 |
+|:--: | :--:  |:--: |
+| router | /article | |
+| method | GET | |
+
+**Request Params**
+None
+
+**Response Data**
+
+```json
+{
+    "list": [
+        {
+            "id": 1,
+            "name": "",
+            "url": "",
+            "type": 1,
+            "date": "2021-03-04"
+        }
+    ]
+}
+```
 
 ### 新闻删除
 
+| 参数 | 值 | 说明 |
+|:--: | :--:  |:--: |
+| router | /article | |
+| method | DELETE | |
+
+**Request Params**
+
+不加数据默认全部删除
+
+```json
+{
+    "list": [1,4,5,20] // 删除的文章 id
+}
+```
+
+**Response Data**
+
+```json
+{
+    "msg": "ok",
+}
+```
 
 ### 新闻新增
+
+| 参数 | 值 | 说明 |
+|:--: | :--:  |:--: |
+| router | /article | |
+| method | POST | |
+
+**Request Params**
+
+```json
+{
+    "list": [
+        {
+            "name": "",
+            "url": "",
+            "type": 1,
+            "date": "2021-03-04"
+        }
+    ]
+}
+```
+
+**Response Data**
+
+```json
+{
+    "msg": "ok",
+}
+```
