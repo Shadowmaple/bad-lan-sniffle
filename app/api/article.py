@@ -5,50 +5,93 @@ from ..models import Article
 from . import api
 
 
-@api.route('', methods = ['GET'])
-def list():
+@api.route('/article', methods=['GET'])
+def List():
     """
     获取新闻列表
     params:
-    #   - page: 页码，从1开始
-    #   - size: 数量
-      - type: 板块类型，0/1/2/3
+      - kind: 板块类型，1/2/3/4
     """
-    type = request.query_string("type")
-    articles = Article.query.filter(type=type).all()
+    kind = request.args.get("kind")
+    if kind is None:
+        return jsonify({
+            'msg': 'kind is required',
+        }), 400
+
+    articles = Article.query.filter_by(kind=int(kind)).all()
 
     list = []
     for article in articles:
-        list.append(article)
+        item = {
+            'id': article.id,
+            'name': article.name,
+            'url': article.url,
+            'kind': article.kind,
+            'date': article.date,
+        }
+        list.append(item)
 
     return jsonify({
-            'msg': 'ok',
-            'list': list,
-        }), 200
+        'msg': 'ok',
+        'list': list,
+    }), 200
 
-@api.route('', methods = ['POST'])
-def create():
-    """
-    创建新的新闻
-    """
+
+@api.route('/article', methods=['POST'])
+def Create():
+    """ 创建文章 """
     body = request.get_json()
-    # to do: check
-    for item in body.list:
-        article = Article(name=item.name, url=item.url, type=item.type)
+    if body is None:
+        return jsonify({
+            'msg': 'no data',
+        }), 400
+    list = body.get('list')
+    if list is None or len(list) == 0:
+        return jsonify({
+            'msg': 'no data',
+        }), 400
+
+    for item in list:
+        name = item.get('name')
+        url = item.get('url')
+        kind = item.get('kind')
+        date = item.get('date')
+        if name is None or url is None or kind is None or date is None:
+            return jsonify({
+            'msg': 'name, url, kind and date are required.',
+        }), 400
+
+        article = Article(name=name, url=url, kind=kind, date=date)
         db.session.add(article)
+
     db.session.commit()
 
     return jsonify({'msg': 'ok'}), 200
 
-@api.route('', methods = ['DELETE'])
-def delete():
-    body = request.get_json()
 
+@api.route('/article', methods=['DELETE'])
+def Delete():
+    """ 删除文章 """
+    body = request.get_json()
     if body is None:
-        # to do
-        db.session.delete()
+        return jsonify({
+            'msg': 'no data',
+        }), 400
+
+    list = body.get('list')
+    kind = body.get('kind')
+    # 无数据则默认全部删除
+    if list is None or len(list) == 0:
+        articles = []
+        if kind is not None:
+            articles = Article.query.filter_by(kind=int(kind)).all()
+        else:
+            articles = Article.query.all()
+
+        for article in articles:
+            db.session.delete(article)
     else:
-        for id in body.list:
+        for id in list:
             article = Article.query.filter_by(id=id).first()
             db.session.delete(article)
 

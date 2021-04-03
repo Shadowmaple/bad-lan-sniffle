@@ -1,5 +1,6 @@
 ## API Doc
 
+host: ...
 路由前缀： /api/v1
 
 ### 不良语言检测
@@ -20,15 +21,24 @@ Content-Type:
 | 参数名 | 位置 | 类型 | 说明 |
 |:--: | :--:  |:--: | :--:|
 | file | body | file stram | |
+| kind | query | int | 分类器类型，0/1/2/3 |
 
 传 json：
 ```json
 {
 	"data": [
 	    "123","test","是打发"
-	]
+	],
+    "kind": 0
 }
 ```
+
+| kind | 分类器 |
+| :--: | :--: |
+| 0 | 文本图+简单自训练算法 |
+| 1 | Doc2vec+CentroidEM |
+| 2 | SIF+Word2vec+CentroidEM |
+| 3 | TFIDF+CentroidEM |
 
 **Response Data**
 ```json
@@ -62,7 +72,7 @@ None
             "id": 1,
             "name": "",
             "url": "",
-            "type": 1,
+            "kind": 1,
             "date": "2021-03-04"
         }
     ]
@@ -82,7 +92,8 @@ None
 
 ```json
 {
-    "list": [1,4,5,20] // 删除的文章 id
+    "list": [1,4,5,20], // 删除的文章 id
+    "kind": 0, // 若全部删除，则选定需要删除的板块
 }
 ```
 
@@ -107,10 +118,10 @@ None
 {
     "list": [
         {
-            "name": "",
-            "url": "",
-            "type": 1,
-            "date": "2021-03-04"
+			"name": "1.关于人工智能的未来，张亚勤、张宏江在聊什么",
+			"url": "https://www.jiqizhixin.com/articles/2021-03-30-12",
+			"kind": 0,
+			"date": "2021-03-04"
         }
     ]
 }

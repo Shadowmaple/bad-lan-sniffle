@@ -1,4 +1,4 @@
-import chardet
+from chardet import detect
 from flask import jsonify, request
 
 from . import api
@@ -17,7 +17,11 @@ CONTENT_TYPE_JSON = 'application/json'
 
 @api.route('/sniffle', methods = ['POST'])
 def sniffle():
-    """ 不良语言检测 """
+    """
+    不良语言检测
+    params:
+    - kind：分类器类别，0/1/2/3
+    """
     # upload_file = request.files['file']
     # if upload_file and allowed_file(upload_file.filename):
     #     filename = secure_filename(upload_file.filename)
@@ -57,10 +61,12 @@ def sniffle():
 
     # 不良语言分类器检测
     # ...
+    # kind = request.query_string("kind")
+
 
     return jsonify({
             'msg': 'ok',
-            'list': '',
+            'data': '',
         }), 200
 
 
@@ -70,7 +76,7 @@ def handle_file_content(file, os='unix'):
     file_content = file.read()
 
     # 编码统一为 utf-8
-    encoding = chardet.detect(file_content)['encoding']
+    encoding = detect(file_content)['encoding']
     if encoding != 'utf-8':
         file_content = file_content.decode(encoding).encode('utf-8')
     print(file_content)
