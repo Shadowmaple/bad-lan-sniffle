@@ -1,6 +1,9 @@
+from os import stat
+
 from chardet import detect
 from flask import jsonify, request
 
+from ..sniffle import Classify
 from . import api
 
 # from werkzeug.utils import secure_filename
@@ -56,17 +59,26 @@ def sniffle():
     if len(list) == 0:
         return jsonify({
                 'msg': 'no content',
-                'list': {},
             }), 200
 
-    # 不良语言分类器检测
-    # ...
-    # kind = request.query_string("kind")
+    kind = request.args.get("kind")
+    if kind is None:
+        kind = 0
 
+    # 不良语言分类器检测
+    status = Classify(kind=int(kind), contents=list)
+    print(status)
+
+    data = []
+    for i in range(len(status)):
+        data.append({
+            "content": list[i],
+            "result": status[i],
+        })
 
     return jsonify({
             'msg': 'ok',
-            'data': '',
+            'data': data,
         }), 200
 
 
