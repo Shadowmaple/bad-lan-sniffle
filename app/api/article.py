@@ -1,6 +1,7 @@
 from flask import jsonify, request
 
 from .. import db
+from ..decorator import require_admin_login
 from ..models import Article
 from . import api
 
@@ -37,7 +38,9 @@ def List():
     }), 200
 
 
+
 @api.route('/article', methods=['POST'])
+@require_admin_login
 def Create():
     """ 创建文章 """
     body = request.get_json()
@@ -70,6 +73,7 @@ def Create():
 
 
 @api.route('/article', methods=['DELETE'])
+@require_admin_login
 def Delete():
     """ 删除文章 """
     body = request.get_json()

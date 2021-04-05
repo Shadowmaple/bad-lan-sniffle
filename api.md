@@ -105,6 +105,10 @@ None
 
 **Request Params**
 
+| 参数名 | 位置 | 类型 | 说明 |
+|:--: | :--:  |:--: | :--:|
+| Authorization | header | string | basic base64(username:pwd) |
+
 不加数据默认全部删除
 
 ```json
@@ -130,6 +134,10 @@ None
 | method | POST | |
 
 **Request Params**
+
+| 参数名 | 位置 | 类型 | 说明 |
+|:--: | :--:  |:--: | :--:|
+| Authorization | header | string | basic base64(username:pwd) |
 
 ```json
 {
