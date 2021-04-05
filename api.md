@@ -17,21 +17,10 @@ Content-Type:
 
 **Request Params**
 
-传文件：
+**based query：**
 | 参数名 | 位置 | 类型 | 说明 |
 |:--: | :--:  |:--: | :--:|
-| file | body | file stram | |
 | kind | query | int | 分类器类型，0/1/2/3 |
-
-传 json：
-```json
-{
-	"data": [
-	    "123","test","是打发"
-	],
-    "kind": 0
-}
-```
 
 | kind | 分类器 |
 | :--: | :--: |
@@ -40,14 +29,42 @@ Content-Type:
 | 2 | SIF+Word2vec+CentroidEM |
 | 3 | TFIDF+CentroidEM |
 
+**传文件：**
+| 参数名 | 位置 | 类型 | 说明 |
+|:--: | :--:  |:--: | :--:|
+| file | body | file stram | |
+
+文件内容：
+```
+123
+test
+太强了
+```
+
+**传 json：**
+```json
+{
+	"data": [
+	    "123","test","太强了"
+	],
+}
+```
+
+
 **Response Data**
 ```json
 {
     "msg": "ok",
     "data": [
         {
+            "result": 0, // 0为非不良语言
+            "content": "123"
+        }, {
             "result": 0,
-            "content": ""
+            "content": "test"
+        }, {
+            "result": 0,
+            "content": "太强了"
         }
     ]
 }
