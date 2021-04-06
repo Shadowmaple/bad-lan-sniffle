@@ -33,7 +33,7 @@ def sniffle():
     # print(request.files)
 
     content_type = request.headers['Content-Type']
-    print(content_type)
+    # print(content_type)
 
     list = []
     if content_type.find(CONTENT_TYPE_FORM_DATA) != -1:

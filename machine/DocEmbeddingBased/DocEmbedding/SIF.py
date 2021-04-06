@@ -55,12 +55,12 @@ class SIFConverter(ConverterBase):
         config = config if config is not None else Word2VecConfig()
         model = w2v_model if w2v_model else Word2Vec(
             tokens_list,
-            size=config.size,
+            vector_size=config.size,
             window=config.window,
             min_count=config.min_count,
             sample=config.sample,
             workers=config.workers,
-            iter=config.iter
+            # iter=config.iter
         )
         word_freq = cls.__calc_words_freq(tokens_list)
         vectors = [cls.__tokens_to_vector(s, word_freq, model, config.size, a) for s in tokens_list]
@@ -122,7 +122,7 @@ class SIFConverter(ConverterBase):
         # smooth inverse frequency, SIF
         for word in tokens:
             a_value = a / (a + word_freq[word])
-            if word in model:
+            if word in model.wv:
                 vec += a_value * model.wv[word]
         vec = vec / len(tokens)
         return vec

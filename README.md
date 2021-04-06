@@ -20,6 +20,12 @@ flask run -h 127.0.0.1 -p 5000
 docker build -t bad-lan-sniffle:0.1 .
 ```
 
+#### 运行
+
+```shell
+docker run -d -p 5000:5000 bad-lan-sniffle:0.1
+```
+
 #### 创建 DB
 
 先进入容器
