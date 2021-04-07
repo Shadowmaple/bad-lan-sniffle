@@ -2,6 +2,7 @@ chardet==4.0.0
 click==7.1.2
 dataclasses==0.8
 Flask==1.1.2
+Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 gensim==4.0.1
 greenlet==1.0.0

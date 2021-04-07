@@ -2,6 +2,7 @@ from os import stat
 
 from chardet import detect
 from flask import jsonify, request
+from flask_cors import cross_origin
 
 from ..sniffle import Classify
 from . import api
@@ -19,6 +20,7 @@ CONTENT_TYPE_JSON = 'application/json'
 #            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 @api.route('/sniffle', methods = ['POST'])
+@cross_origin()
 def sniffle():
     """
     不良语言检测
