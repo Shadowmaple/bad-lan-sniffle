@@ -13,7 +13,7 @@ def List():
     """
     获取新闻列表
     params:
-      - kind: 板块类型，1/2/3/4
+      - kind: 板块类型，0/1/2/3
     """
     kind = request.args.get("kind")
     if kind is None:
