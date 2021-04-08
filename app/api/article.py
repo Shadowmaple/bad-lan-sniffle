@@ -1,4 +1,5 @@
 from flask import jsonify, request
+from flask_cors import cross_origin
 
 from .. import db
 from ..decorator import require_admin_login
@@ -7,6 +8,7 @@ from . import api
 
 
 @api.route('/article', methods=['GET'])
+@cross_origin()
 def List():
     """
     获取新闻列表

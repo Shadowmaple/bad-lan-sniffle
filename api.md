@@ -78,7 +78,10 @@ test
 | method | GET | |
 
 **Request Params**
-None
+
+| 参数名 | 位置 | 类型 | 说明 |
+|:--: | :--:  |:--: | :--:|
+| kind | query | int | 板块类型，取值为1/2/3/4 |
 
 **Response Data**
 
