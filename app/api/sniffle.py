@@ -38,6 +38,8 @@ def sniffle():
     # print(content_type)
 
     list = []
+    kind = 0 # 请求参数的是文本还是json
+    file_names = [] # json传过来的文件名
     if content_type.find(CONTENT_TYPE_FORM_DATA) != -1:
         file = request.files.get('file') # 类型：<class 'werkzeug.datastructures.FileStorage'>
         if file is None:
@@ -46,12 +48,17 @@ def sniffle():
                 }), 400
         list = handle_file_content(file=file)
     elif content_type.find(CONTENT_TYPE_JSON) != -1:
+        kind = 1
         data = request.json.get('data')
         if data is None:
             return jsonify({
                     'msg': 'no data',
                 }), 400
-        list = data
+
+        for item in data:
+            list.append(item.get('content'))
+            file_names.append(item.get('file_name'))
+
     else:
         return jsonify({
                 'msg': 'no content-type',
@@ -71,11 +78,17 @@ def sniffle():
     status = Classify(kind=int(kind), contents=list)
     print(status)
 
+    print(file_names)
     data = []
     for i in range(len(status)):
+        if kind == 0:
+            cur_file_name = ""
+        else:
+            cur_file_name = file_names[i] or ""
         data.append({
             "content": list[i],
             "result": status[i],
+            "file_name": cur_file_name,
         })
 
     return jsonify({

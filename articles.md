@@ -315,7 +315,7 @@
 			"url": "https://zhuanlan.zhihu.com/p/261871560",
 			"kind": 1,
 			"date": "2021-03-04"
-    	},
+    	}
 	]
 }
 ```
@@ -477,7 +477,7 @@
 			"url": "https://zhuanlan.zhihu.com/p/349989934",
 			"kind": 2,
 			"date": "2021-03-04"
-        },
+        }
      ]
 }
 ```
@@ -639,8 +639,7 @@
 			"url": "https://pytorch-cn.readthedocs.io/zh/latest/",
 			"kind": 3,
 			"date": "2021-03-04"
-        },
+        }
      ]
 }
 ```
-

@@ -44,9 +44,21 @@ test
 **传 json：**
 ```json
 {
-	"data": [
-	    "123","test","太强了"
-	],
+	// "data": [
+	//     "123","test","太强了"
+	// ],
+    "data": [
+        {
+            "content": "123",
+            "file_name": ""
+        },{
+            "content": "test",
+            "file_name": ""
+        },{
+            "content": "太强了",
+            "file_name": ""
+        }
+    ]
 }
 ```
 
@@ -58,13 +70,16 @@ test
     "data": [
         {
             "result": 0, // 0为非不良语言
-            "content": "123"
+            "content": "123",
+            "file_name": ""
         }, {
             "result": 0,
-            "content": "test"
+            "content": "test",
+            "file_name": ""
         }, {
             "result": 0,
-            "content": "太强了"
+            "content": "太强了",
+            "file_name": ""
         }
     ]
 }
