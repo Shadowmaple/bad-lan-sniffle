@@ -7,5 +7,4 @@ def Classify(kind:int, contents:list) -> list:
         return []
 
     data = classify(kind, contents)
-
     return data

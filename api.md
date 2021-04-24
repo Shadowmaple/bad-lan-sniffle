@@ -177,3 +177,32 @@ test
     "msg": "ok",
 }
 ```
+
+### 不良语言词典
+
+| 参数 | 值 | 说明 |
+|:--: | :--:  |:--: |
+| router | /dict | |
+| method | GET | |
+
+**Request Params**
+
+| 参数名 | 位置 | 类型 | 说明 |
+|:--: | :--:  |:--: | :--:|
+| page | query | int | 页码，默认为1 |
+| size | query | int | 数量 |
+
+**Response Data**
+
+```json
+{
+  "list": [
+    {
+      "content": "太强了"
+    },
+  ],
+  "msg": "ok",
+  "page": "1",
+  "size": 2
+}
+```

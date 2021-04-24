@@ -1,9 +1,8 @@
-from os import stat
-
 from chardet import detect
 from flask import jsonify, request
 from flask_cors import cross_origin
 
+from ..models import NewDictionaryRecords
 from ..sniffle import Classify
 from . import api
 
@@ -90,6 +89,8 @@ def sniffle():
             "result": status[i],
             "file_name": cur_file_name,
         })
+
+    NewDictionaryRecords(contents=list)
 
     return jsonify({
             'msg': 'ok',
