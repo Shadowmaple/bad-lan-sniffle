@@ -26,7 +26,8 @@ def List_dict():
 
     return jsonify({
             'msg': 'ok',
-            'page': page,
+            'page': dictionaries.page,
+            'pages': dictionaries.pages,
             'size': len(list),
             'list': list,
         }), 200
