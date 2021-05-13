@@ -75,9 +75,7 @@ def sniffle():
 
     # 不良语言分类器检测
     status = Classify(kind=int(kind), contents=list)
-    print(status)
 
-    print(file_names)
     data = []
     for i in range(len(status)):
         if kind == 0:
@@ -90,7 +88,7 @@ def sniffle():
             "file_name": cur_file_name,
         })
 
-    NewDictionaryRecords(contents=list)
+    # NewDictionaryRecords(contents=list)
 
     return jsonify({
             'msg': 'ok',
