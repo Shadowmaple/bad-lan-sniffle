@@ -22,6 +22,14 @@ class Dictionary(db.Model):
     count = db.Column(db.Integer, unique=False, index=False) # 计数，暂时用不到
 
 
+# 不良语言语料库
+class Library(db.Model):
+    __tablename__ = "library"
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(255), unique=False, index=False) # 内容
+    count = db.Column(db.Integer, unique=False, index=False) # 计数，暂时用不到
+
+
 def NewDictionaryRecords(contents:list):
     """ 判定语句串，若所有分类器判定结果为不良语言，则加入词典中 """
     size = len(contents)

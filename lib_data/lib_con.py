@@ -1,7 +1,4 @@
 
-from os import read
-
-
 def readData():
     path = "./data02.txt"
     f = open(path, "r", encoding="utf-8")
