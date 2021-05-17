@@ -14,23 +14,23 @@ def readData():
     #    print(x[1])
         res.append(x[1].split("\n")[0])
 
-    # with open("./dict_origin.txt", "w", encoding="utf-8") as f1:
+    # with open("./lib_origin.txt", "w", encoding="utf-8") as f1:
     #     # f1.write(print(res))
     #     s = ",".join(res)
     #     print(s)
 
-    # python3 dict_con.py > dict_origin.txt
+    # python3 lib_con.py > lib_origin.txt
     print(res)
 
 
 def replace():
-    f = open("./dict_origin.txt", "r", encoding="utf-8")
+    f = open("./lib_origin.txt", "r", encoding="utf-8")
     line = f.readline()
     f.close()
     # print(line)
     a = line.replace("'", '"')
     a = a.replace('""', '"')
-    with open("./dict_tar.txt", "w", encoding="utf-8") as f2:
+    with open("./lib_tar.txt", "w", encoding="utf-8") as f2:
         f2.write(a)
 
 
