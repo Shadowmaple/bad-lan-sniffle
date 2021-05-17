@@ -37,7 +37,7 @@ def List_dict():
 
 @api.route('/dict', methods=['POST'])
 @require_admin_login
-def Add_dic():
+def Add_dict():
     """ 添加词典 """
     """
     {
@@ -68,7 +68,7 @@ def Add_dic():
 
 @api.route('/dict', methods=['DELETE'])
 @require_admin_login
-def Remove():
+def Remove_dict():
     """ 移除 """
     """
     {

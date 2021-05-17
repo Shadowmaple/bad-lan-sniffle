@@ -37,7 +37,7 @@ def List_lib():
 
 @api.route('/lib', methods=['POST'])
 @require_admin_login
-def Add_dic():
+def Add_lib():
     """ 添加语料库 """
     """
     {
