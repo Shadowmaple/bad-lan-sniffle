@@ -44,9 +44,6 @@ test
 **传 json：**
 ```json
 {
-	// "data": [
-	//     "123","test","太强了"
-	// ],
     "data": [
         {
             "content": "123",
