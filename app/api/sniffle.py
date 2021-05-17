@@ -51,7 +51,12 @@ def sniffle():
                 }), 400
 
         for item in data:
-            list.append(item.get('content'))
+            content = item.get('content')
+            if content.find("\n") == -1:
+                list.append(content)
+            else:
+                contents = split_content(content=content)
+                list.extend(contents)
 
     else:
         return jsonify({
@@ -99,6 +104,18 @@ def handle_file_content(file, os='unix'):
 
     # bytes 类型转为 str
     content = str(file_content, encoding='utf-8')
+    # Win下换行符是 \r\n，统一成 Unix 下的 \n
+    if content.find(WIN_END) != -1:
+        content = content.replace(WIN_END, UNIX_END)
+
+    # 以换行符分割，并去除末尾的空串
+    list = content.split(UNIX_END)
+    if list.count('') > 0:
+        list = list[:list.index('')]
+
+    return list
+
+def split_content(content:str):
     # Win下换行符是 \r\n，统一成 Unix 下的 \n
     if content.find(WIN_END) != -1:
         content = content.replace(WIN_END, UNIX_END)
