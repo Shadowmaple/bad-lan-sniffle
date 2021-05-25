@@ -138,9 +138,32 @@ def get_data_from_input():
 
     return pairs
 
+def get_data_from_label():
+    """
+    仿照get_data，但是功能是直接从input中输入数据，并且该数据要求携带有label
+    :return:
+    -------
+    pairs: list,
+        每一项是tuple(class_no, text)
+    """
+    n = input("输入句子个数")
+    n = int(n)
+    lines = []
+
+    for i in range(n):
+        line = input("请输入句子")
+        lines.append(line)
+
+    pairs = []
+    for line in lines:
+        items = line.split()
+        pairs.append((items[0], "".join(items[1:])))
+
+    return pairs
+
 stopwords = __get_stopwords()
 punctuations = string.punctuation + zhon.hanzi.punctuation
 # 句末标点，会影响到TextGraph的生成
 end_punctuations = list(",.;?!，。；？！…")
 
-__all__ = ('get_data', 'format_data', 'text_cut', 'tokenize', 'stopwords','get_data_from_input')
+__all__ = ('get_data', 'format_data', 'text_cut', 'tokenize', 'stopwords','get_data_from_input', 'get_data_from_label')

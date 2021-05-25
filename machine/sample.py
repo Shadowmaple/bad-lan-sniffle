@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import random
-
+from machine.DocEmbeddingBased.Sample_label import *
 from machine.DocEmbeddingBased.Samples import (doc2vec_sample, sif_sample,
                                                tfidf_sample)
 from machine.GraphBased.Samples import Graph_result
+from machine.GraphBased.Samples_label import *
 from machine.Utils.DataProcess import get_data_from_input
 
 
@@ -24,6 +24,40 @@ def classify(kind:int,docs:list):
     elif kind == 1:return use_doc2vec_sample(docs)
     elif kind == 2:return use_sif_sample(docs)
     elif kind == 3:return use_tfidf_sample(docs)
+
+
+def use_graph_label_sample(test:list):
+    return Graph_result_label(test)
+
+
+def use_tfidf_label_sample(test:list):
+    return tfidf_label_sample(test)
+
+
+def use_sif_label_sample(test:list):
+    return sif_label_sample(test)
+
+
+def use_doc2vec_label_sample(test:list):
+    return doc2vec_label_sample(test)
+
+
+def classify_label(kind:int,docs:list):
+    docs = get_data_to_label(docs)
+    if kind == 0:return use_graph_label_sample(docs)
+    elif kind == 1:return use_doc2vec_label_sample(docs)
+    elif kind == 2:return use_sif_label_sample(docs)
+    elif kind == 3:return use_tfidf_label_sample(docs)
+
+
+def get_data_to_label(docs:list):
+    pairs = []
+    for line in docs:
+        items = line.split()
+        pairs.append((items[0], "".join(items[1:])))
+
+    return pairs
+
 
 if __name__ == '__main__':
     docs:list
