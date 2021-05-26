@@ -36,7 +36,6 @@ def sniffle2():
 
     # 不良语言分类器检测
     classify_res = Classify_label(kind=int(kind), contents=list)
-    print(classify_res)
 
     data = []
     for i in range(len(classify_res)):
